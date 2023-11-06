@@ -55,6 +55,7 @@ window.onload = function(){
 		popupForm.submit(); //메소드로 form 전송하기.
 		
 		} else {
+			//display속성을 none으로 설정하면 화면에서 출력
 			popup.style.display = 'none';
 			//out.print('체크박스가 선택되지 않았습니다.');
 		}
