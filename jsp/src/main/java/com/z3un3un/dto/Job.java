@@ -4,9 +4,11 @@ public class Job {
 	private String jobCode;
 	private String jobName;
 	
+	@Override
 	public String toString() {
-		return jobCode + "/" + jobName;
+		return jobCode + "/" +jobName;
 	}
+	
 	public String getJobCode() {
 		return jobCode;
 	}
@@ -19,7 +21,4 @@ public class Job {
 	public void setJobName(String jobName) {
 		this.jobName = jobName;
 	}
-	
-	
-
 }
