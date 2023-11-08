@@ -14,6 +14,7 @@ public class LocDao extends DBConnection{
 	public String dept_title;
 	public String local_name;
 	
+	//생성자를 통해서(dao) Connection객체를 생성 후 멤버변수 con에 저장(DBConnection)
 	public LocDao(ServletContext application) {
 		super(application);
 	}

@@ -11,6 +11,9 @@ import javax.servlet.ServletContext;
 
 
 public class DBConnection {
+	
+	// con이 null인 경우 NPE 발생할 수 있다.
+	// con 변수에 값을 넣어야한다!
 	public Connection con;
 	public Statement stmt;
 	public PreparedStatement pstmt;

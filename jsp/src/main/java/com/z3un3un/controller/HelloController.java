@@ -1,6 +1,8 @@
-package com.z3un3un;
+package com.z3un3un.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,13 @@ public class HelloController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		//한글 깨지지 않도록 설정. servlet에서는 화면을 만들기 번거롭다.
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.append("out 객체를 이용한 출력");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

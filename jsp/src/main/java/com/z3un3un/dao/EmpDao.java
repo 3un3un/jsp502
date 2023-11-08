@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.z3un3un.common.DBConnPool;
 import com.z3un3un.common.DBConnection;
 import com.z3un3un.dto.EmpDto;
 
@@ -15,11 +16,18 @@ import com.z3un3un.dto.EmpDto;
  * 
  * Dao -> mapper
  */
-public class EmpDao extends DBConnection{
+public class EmpDao extends DBConnPool{
 	
-	public EmpDao(ServletContext application) {
-		super(application); //부모 생성자 호출
-	}
+	
+	/**
+	 * 생성자를 이용하여 Connection 객체를 생성 후
+	 * 멤버변수인 con에 저장한다.
+	 * @param application
+	 */
+/*	DBConnPool -> 생성자 더이상 필요X
+//	public EmpDao(ServletContext application) {
+//		super(application); //부모 생성자 호출
+//	}
 	
 	/*
 	 * 데이터베이스로부터 사원의 목록을 조회하여 반환한다.
@@ -46,6 +54,7 @@ public class EmpDao extends DBConnection{
 				
 				list.add(dto);
 			}
+			close();
 			
 
 		} catch (SQLException e) {
