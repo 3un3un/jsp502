@@ -57,6 +57,14 @@
   	<location>/Exception.jsp</location>
   </error-page>
   
+  
+<!-- 유지시간을 '분' 단위로 설정 -->  
+<session-config>
+    <session-timeout>20</session-timeout>
+</session-config>
+  
+  
+  
   <!--
   <servlet>
   	<servlet-name>서블릿 이름</servlet-name>
