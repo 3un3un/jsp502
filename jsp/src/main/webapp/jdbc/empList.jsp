@@ -13,7 +13,7 @@
 <h2>Controller를 이용해서 사원목록을 출력해봅시다.</h2>
 
 <%
-	//request.getAttribute()의 반환타입 Obhect 타입이므로
+	//request.getAttribute()의 반환타입 Object 타입이므로
 	//형변환 후에 사용이 가능하다.
 	List<EmpDto> list = (List<EmpDto>)request.getAttribute("list");
 %>
