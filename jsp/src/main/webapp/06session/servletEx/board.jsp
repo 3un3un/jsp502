@@ -11,6 +11,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <script>
 //화면에서 동적 처리
 window.onload = function() {
@@ -27,7 +29,8 @@ window.onload = function() {
 	if(loginBtn != null) {
 		loginBtn.addEventListener('click', function(){
 			//로그인페이지로 이동
-			loginForm.action="loginForm.jsp";
+			//같은 경로
+			loginForm.action="/06session/servletEx/loginForm.jsp";
 			loginForm.submit();
 			
 		});
@@ -75,89 +78,9 @@ window.onload = function() {
 %>
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- 231109 오전
-<script>
-window.onload = function() {
-	let logoutBtn = document.querySelector('#logoutBtn');
-	if(logoutBtn != null) {
-		logoutBtn.onclick = function(){
-			loginForm.action = "/logout";
-			loginForm.submit();
-		}
-	}	
-		loginBtn.addEventListener('click', function(){
-			loginForm.action = "loginForm.jsp";
-			loginForm.submit();
-			
-		});
-	
-/* 	let title = document.querySelector('#title');
-	if(title != null) {
-		title.onclick = function(){
-			alert('클릭');
-			console.log('df');
-		}
-	} */
-
-	
-}
-
-</script>
-
-<!--  로그인/로그아웃 링크 보여주기
-	- 세션에 userId가 null이 아니면 로그아웃 링크, null이면 로그인 링크를 화면에 출력
--->
-
-<%
-MemberDto dto = (MemberDto)session.getAttribute("MemberDto");
-%>
-
-<form name="loginForm">
-
-<%
-Object userId = session.getAttribute("userId");
-if(userId!=null && !"".equals(userId)){
-	out.print("1:" + userId.toString() +"님 환영합니다.");
-%>
-2: <%=userId.toString() %>님 환영합니다.
-
-	<button id = "logoutBtn">로그아웃</button>
-	
-<%	
-} else {
-	out.print("ㅇㅇㅇ");
-%>
-	<button id = "loginBtn">로그인</button>
-<% } %>
-</form>
-
-
-
 <h2>게시판</h2>
 
-<button id = "detailBtn">이동</button>
-
-<table border="1" id="boardtable">
+<table border="1">
 	<tr>
 		<th>일련번호</th>
 		<th>제목</th>
@@ -166,23 +89,26 @@ if(userId!=null && !"".equals(userId)){
 		<th>작성일</th>
 		<th>조회수</th>
 	</tr>
-	<%
+	<%	
 	if(request.getAttribute("list") != null){
-		List<BoardDto> list = (List<BoardDto>)request.getAttribute("list");
-		for(BoardDto boarDto : list) {
+		List<BoardDto> list = (List<BoardDto>)request.getAttribute("list"); 
+		for(BoardDto dto :list){
 	%>
-	<tr>
-		<td><%= boarDto.getNum()%></td>
-		<td><a href='#' oncliek='함수명(매개변수)'><%= boarDto.getTitle()%></a></td>
-		<td><%= boarDto.getContent()%></td>
-		<td><%= boarDto.getId()%></td>
-		<td><%= boarDto.getPostdate()%></td>
-		<td><%= boarDto.getVisitcount()%></td>
-	</tr>
-		<%}
-	}%>
+			
+			<tr>
+				<td><%= dto.getNum()%></td>
+				<td><a href="/boardRead?num=<%= dto.getNum()%>"><%=dto.getTitle() %></a></td>
+				<td><%= dto.getContent()%></td>
+				<td><%= dto.getId()%></td>
+				<td><%= dto.getPostdate()%></td>
+				<td><%= dto.getVisitcount()%></td>
 
-</table> --%>
+			</tr>
+	<%	}
+	} 
+	%>
+</table>
+
 
 
 </body>
