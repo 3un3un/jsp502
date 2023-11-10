@@ -9,8 +9,8 @@
 <body>
 <%
 
-	out.print("title : " + title);
-	out.print("content : " + content);
+	//out.print("title : " + title);
+	//out.print("content : " + content);
 %>
 <script type="text/javascript">
 window.load
