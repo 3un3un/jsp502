@@ -1,3 +1,4 @@
+<%@page import="com.z3un3un.dto.Criteria"%>
 <%@page import="com.z3un3un.dto.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.z3un3un.dao.BoardDao"%>
@@ -23,7 +24,7 @@
 
 <%
 BoardDao dao = new BoardDao();
-List<BoardDto> boardDto = (List<BoardDto>)dao.getList();
+List<BoardDto> boardDto = (List<BoardDto>)dao.getList(new Criteria());
 session.setAttribute("boardDto", boardDto.toString());
 
 %>

@@ -41,12 +41,12 @@ public class BoardDao extends DBConnPool {
 
 			while(rs.next()) {
 				BoardDto dto = new BoardDto();
-				dto.setNum(rs.getString(1));
-				dto.setTitle(rs.getString(2));
-				dto.setContent(rs.getString(3));
-				dto.setId(rs.getString(4));
-				dto.setPostdate(rs.getString(5));
-				dto.setVisitcount(rs.getString(6));
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setId(rs.getString("id"));
+				dto.setPostdate(rs.getString("postdate"));
+				dto.setVisitcount(rs.getString("visitcount"));
 				
 				list.add(dto);
 			}
@@ -99,6 +99,14 @@ public class BoardDao extends DBConnPool {
 				dto.setId(rs.getString(4));
 				dto.setPostdate(rs.getString(5));
 				dto.setVisitcount(rs.getString(6));
+				
+				
+				/*
+				 * dto.setNum(rs.getString("num")); dto.setTitle(rs.getString("title"));
+				 * dto.setContent(rs.getString("content")); dto.setId(rs.getString("id"));
+				 * dto.setPostdate(rs.getString("postdate"));
+				 * dto.setVisitcount(rs.getString("visitcount"));
+				 */
 				
 			}
 		

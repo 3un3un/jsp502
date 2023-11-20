@@ -1,10 +1,13 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.z3un3un.dto.Criteria"%>
 <%@page import="com.z3un3un.dto.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.z3un3un.dao.BoardDao"%>
 <%@page import="com.z3un3un.dto.MemberDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,56 +62,56 @@ window.onload = function() {
  -->
 <form method="get" name="loginForm">
 
-
-<%
-	//getAttribute의 반환타입은 Object이므로 형변환이 필요하다.
-	//NPE 방지를 위하여 null체크 진행
-	if(session.getAttribute("userId") != null
-			&& !"".equals(session.getAttribute("userId").toString())) {
-		//로그인한 사용자 - 로그아웃 버튼 출력 -> 세션을 만료시키고 로그인페이지로 이동
-%>
-	<%=session.getAttribute("userId") %>님 환영합니다.
+	<c:if test="${not empty userId }">
+	${userId }님 환영합니다.
 	<button id="logoutBtn">로그아웃</button>
-<%
-	} else {
-		//로그인하지 X 사용자 - 로그인버튼 출력 -> 로그인 페이지로 이동
-%>
+	</c:if>
+
+	<c:if test="${empty userId }">
 	<button id="loginBtn">로그인</button>
-<% 		
-	}
-%>
+	</c:if>
+
 
 </form>
 <h2>게시판</h2>
 
+<!-- 변수를 4가지 영역 중 한 곳에 저장 -->
+<%-- 리스트 : ${list } --%>
+<!-- 만약 리스트의 사이즈가 0이라면 조회된 데이터가 없습니다 출력
+	 만약 리스트의 사이즈가 0이 아니라면 목록을 출력 -->
+	 
 <table border="1">
 	<tr>
 		<th>일련번호</th>
-		<th>제목</th>
-		<th>내용</th>
+		<th style="width:20%">제목</th>
+		<th style="width:20%">내용</th>
 		<th>작성자</th>
-		<th>작성일</th>
+		<th style="width:20%">작성일</th>
 		<th>조회수</th>
 	</tr>
-	<%	
-	if(request.getAttribute("list") != null){
-		List<BoardDto> list = (List<BoardDto>)request.getAttribute("list"); 
-		for(BoardDto dto :list){
-	%>
-			
-			<tr>
-				<td><%= dto.getNum()%></td>
-				<td><a href="/boardRead?num=<%= dto.getNum()%>"><%=dto.getTitle() %></a></td>
-				<td><%= dto.getContent()%></td>
-				<td><%= dto.getId()%></td>
-				<td><%= dto.getPostdate()%></td>
-				<td><%= dto.getVisitcount()%></td>
+	
+<c:if test="${empty list}">
+	<tr>
+		<td colspan="6">게시판이 존재하지 않습니다.</td>
+	</tr>
+</c:if>
 
-			</tr>
-	<%	}
-	} 
-	%>
+<c:if test="${!empty list}">
+
+<c:forEach var="boardDto" items="${list }">
+	<tr>
+		<th><a href="/boardRead?num=${dto.getNum() }">${boardDto.num }</a></th>
+		<th>${boardDto.title }</th>
+		<th>${boardDto.content }</th>
+		<th>${boardDto.id }</th>
+		<th>${boardDto.postdate }</th>
+		<th>${boardDto.visitcount }</th>
+	</tr>
+</c:forEach>
+</c:if>
 </table>
+<hr>
+
 
 <!--  페이지 네비게이션 작성
 	- 페이지 번호 pageNo
@@ -120,45 +123,10 @@ window.onload = function() {
 		진짜 블럭의 끝번호
 
  -->
- <%
- 	out.print("페이지블럭 시작===============================================");
- 	
- 	//페이지블럭 번호
- 	int startNo = 0;
- 	int endNo = 0;
- 	
- 	//연산을 위해서 (올림처리를 위해) double 타입으로 선언
- 	//java에서 int/int = int
- 	double pagePerBlock = 10.0;
- 	
-	Criteria cri = new Criteria();
-	int totalCnt = 0;
- 	if(request.getAttribute("cri") != null
- 			&& !"".equals(request.getAttribute("cri"))){
- 		cri = (Criteria)request.getAttribute("cri");
- 		out.print("<br>요청페이지 번호 - pageNo : " + cri.getPageNo());
- 		out.print("<br>페이지당 게시물수 - amount : " + cri.getAmount());
- 	}
- 	if(request.getAttribute("totalCnt") != null
- 			&& !"".equals(request.getAttribute("totalCnt"))){
- 		totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
- 		out.print("<br>총 게시물의 수 : " + totalCnt);		
- 	}
- 	
- 	//페이지 블럭의 시작번호와 끝번호 구하기
- 	//끝번호 구하기
- 	// ex) 7페이지 요청 : 올림(7/10.0) * 10
- 	// ex) 11페이지 요청 : 올림(11/10.0) * 10
- 	endNo = (int)(Math.ceil(cri.getPageNo() / pagePerBlock) * pagePerBlock);
- 	startNo = endNo - ((int)pagePerBlock - 1);
- 	out.print("<br>");
- 	//페이지 블럭을 생성
- 	for(int i=startNo; i<=endNo; i++){
- 		out.print("<a href='boardList?pageNo="+i+"'>" + i + "</a> ");
- 	}
- 	
- 	
- %>
+ 
+ <!-- pageNavi include -->
+<%@include file="pageNavi.jsp" %> 
+
 
 
 </body>

@@ -14,6 +14,9 @@ public class Criteria {
 
 	
 	public Criteria() {
+		//시작번호와 끝번호를 구한다.
+		endNum = this.pageNo * this.amount;
+		startNum = endNum - (this.amount - 1);
 	}
 
 	public Criteria(String pageNo, String amount) {
