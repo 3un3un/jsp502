@@ -8,6 +8,17 @@ public class BoardDto {
 	public String postdate;
 	public String visitcount;
 	
+	
+
+	public BoardDto(String num, String title, String content, String id, String postdate, String visitcount) {
+		super();
+		this.num = num;
+		this.title = title;
+		this.content = content;
+		this.id = id;
+		this.postdate = postdate;
+		this.visitcount = visitcount;
+	}
 	public String getNum() {
 		return num;
 	}
