@@ -18,15 +18,18 @@ public class PageDto {
 		this.totalCnt = totalCnt;
 		this.cri = cri;
 		
-		endNo = (int)(Math.ceil(cri.getPageNo()/blockAmount*1.0))* blockAmount;
-		startNo = endNo - (cri.getAmount()-1);
-		//77개면 블럭 8개 나와야함 77/10 = 7.7
-		realEnd = (int)Math.ceil(totalCnt / cri.getAmount()*1.0);
+		endNo = (int)Math.ceil(cri.getPageNo()/(blockAmount*1.0))* blockAmount;
+		startNo = endNo - (blockAmount-1);
+		//77개면 블럭 8개 나와야함 77/10 = 7.7 12/10 1.2
+		realEnd = (int)Math.ceil((totalCnt*1.0) / cri.getAmount());
 		
 		endNo = (endNo>realEnd ? realEnd : endNo);
 		prev = (startNo == 1 ? false : true);
 		next = (endNo == realEnd ? false : true);
-		
+		System.out.println("endNo "+endNo + " startNo " + startNo + " realEnd " + realEnd
+				+ " prev " + prev + " next " + next);
+		System.out.println("totalCnt "+totalCnt + " cri.getPageNo " + cri.getPageNo()
+		+  " cri.getAmount() " + cri.getAmount() + " blockAmount " + blockAmount);
 		
 	}
 	

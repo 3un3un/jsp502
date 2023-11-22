@@ -10,11 +10,20 @@ import com.z3un3un.lib.dto.Criteria;
 
 public class BookDao extends DBConnPool{
 	
-	public List<BookDto> getList(){
-		String sql = "select * from book";
+	public List<BookDto> getList(Criteria cri){
 		List<BookDto> list = new ArrayList<>();
 		try {
-			pstmt = con.prepareStatement(sql);
+			String where="";
+			if(!"".equals(cri.getSearchWord()) 
+					&& !"".equals(cri.getSearchField())){
+				where = " and "+cri.getSearchField()+ " like '%"+cri.getSearchWord()+"%'";
+			}
+			pstmt = con.prepareStatement("select * from book"
+					+ " where no between ? and ?"+where);
+			System.out.println("cri.getSearchField()"+cri.getSearchField());
+			System.out.println("cri.getSearchWord()"+cri.getSearchWord());
+			pstmt.setInt(1,cri.getStartNo());
+			pstmt.setInt(2,cri.getEndNo());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String no = rs.getString("no");
@@ -32,20 +41,21 @@ public class BookDao extends DBConnPool{
 	}
 	
 	public int totalCnt(Criteria cri) {
-		int tot = 0;
-		String sql = "select count(*) from book where ";
+		int res = 0;
+		String sql = "select count(*) from book";
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				tot = rs.getInt(1);
+				res = rs.getInt(1);
+				System.out.println("res"+res);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("totalCnt오류");
 			e.printStackTrace();
 		}
 		
-		return tot;
+		return res;
 	
 		
 		
