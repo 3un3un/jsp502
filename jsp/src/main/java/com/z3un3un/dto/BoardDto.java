@@ -9,7 +9,11 @@ public class BoardDto {
 	public String visitcount;
 	
 	
-
+	
+	public BoardDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public BoardDto(String num, String title, String content, String id, String postdate, String visitcount) {
 		super();
 		this.num = num;

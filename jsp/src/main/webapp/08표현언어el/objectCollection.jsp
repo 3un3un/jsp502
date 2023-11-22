@@ -1,6 +1,6 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.momo.dto.Person"%>
+<%@page import="com.z3un3un.dto.Person"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

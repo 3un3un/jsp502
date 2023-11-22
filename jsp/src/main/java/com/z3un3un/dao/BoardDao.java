@@ -21,23 +21,32 @@ public class BoardDao extends DBConnPool {
 //	}
 	public List<BoardDto> getList(Criteria cri) {
 		List<BoardDto> list = new ArrayList<>();
-		String sql = "select *\r\n"
-				+ "from (\r\n"
-				+ "    select rownum rnum, b.*\r\n"
-				+ "    from (\r\n"
-				+ "        select *\r\n"
-				+ "        from board\r\n"
-				+ "        order by num desc\r\n"
-				+ "        ) b\r\n"
-				+ "    )\r\n"
-				+ "where rnum between ? and ?";
-		
 		try {
+			String where = "";
+			//검색어와 검색필드에 값이 들어있다면 조건문장을 생성한다.
+			if(!"".equals(cri.getSearchField())
+					&& !"".equals(cri.getSearchWord())) {
+				where = "where " + cri.getSearchField()
+								+" like '%" + cri.getSearchWord() + "%' ";
+			}
 			
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement("select *\r\n"
+					+ "from (\r\n"
+					+ "    select rownum rnum, b.*\r\n"
+					+ "    from (\r\n"
+					+ "        select *\r\n"
+					+ "        from board\r\n"
+
+					+ where
+					+ "        order by num desc\r\n"
+					+ "        ) b\r\n"
+					+ "    )\r\n"
+					+ "where rnum between ? and ?");
 			pstmt.setInt(1, cri.getStartNum());
 			pstmt.setInt(2, cri.getEndNum());
 			rs = pstmt.executeQuery();
+			
+			System.out.println("pstmt " + pstmt);
 
 			while(rs.next()) {
 				BoardDto dto = new BoardDto();
@@ -64,10 +73,22 @@ public class BoardDao extends DBConnPool {
 	 *  - 집계함수를 이용하여 게시글의 총건수를 구해본다.
 	 * @return 게시글의 총 건수
 	 */
-	public int getTotalCnt() {
+	public int getTotalCnt(Criteria cri) {
 		int res = 0;
+		
+		String where="";
+		//검색어와 검색필드에 값이 있으면 조건문장 생성
+		if(!"".equals(cri.getSearchField())
+				&& !"".equals(cri.getSearchWord())) {
+			where = "where " + cri.getSearchField()
+							+" like '%" + cri.getSearchWord() + "%' ";
+		}
+		
+		
+		
 		String sql = "select count(*)\r\n"
 				+ "from board";
+		
 		
 		try {
 			pstmt = con.prepareStatement(sql);

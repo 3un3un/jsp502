@@ -9,10 +9,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="/boardList" name="searchForm">
+num : <input type="text" name="num" value="${param.num }">
+pageNo : <input type="text" name="pageNo" value="${param.pageNo }">
+searchWord : <input type="text" name="searchWord" value="${param.searchWord }">
+searchField : <input type="text" name="searchField" value="${param.searchField }">
+</form>
+
 <script type="text/javascript">
 window.onload = function() {
 	document.querySelector('#listBtn').onclick = function(){
-		location.href='/boardList';
+		searchForm.submit();
+		//location.href='/boardList';
+		
+		
+		
 		
 	}
 	deleteBtn.addEventListener('click',()=> { //function대신 화살표 함수 사용
