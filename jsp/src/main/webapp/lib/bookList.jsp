@@ -19,7 +19,14 @@
 도서목록을 출력합니다.
 
 <script type="text/javascript">
-
+window.onload = function(){
+	document.querySelector('#searchBtn').addEventListener('click', function(){
+		form.action = '/bookList';
+	});
+		
+	
+	
+}
 </script>
 <form name="searchForm">
 <select name="searchField">

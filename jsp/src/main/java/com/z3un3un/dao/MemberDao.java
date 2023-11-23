@@ -54,5 +54,36 @@ public class MemberDao extends DBConnPool{
 		
 		
 	}
+	//회원가입
+	public int register(String id, String name, String pass, String email) {
+		int res = 0;
+		String sql = "insert into member (id, pass, name, regidate, email)\r\n"
+				+ "values(?, ?, ?, sysdate, ? )";
+		
+		
+		try {
+			if(id !=null && name != null && pass != null && email != null) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, pass);
+				pstmt.setString(3, name);
+				pstmt.setString(4, email);
+				res = pstmt.executeUpdate();
+			}
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return res;
+		
+		
+		
+		
+		
+	}
+
 
 }

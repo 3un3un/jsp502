@@ -30,7 +30,18 @@ public class Criteria {
 		endNum = this.pageNo * this.amount;
 		startNum = endNum - (this.amount - 1);
 	}
+	public Criteria(String pageNo, String amount) {
+		if(pageNo != null && !"".equals(pageNo)) {
+			this.pageNo = Integer.parseInt(pageNo);
+		}
+		if(amount != null && !"".equals(amount)) {
+			this.amount = Integer.parseInt(amount);
+		}
+		
+		endNum = this.pageNo * this.amount;
+		startNum = endNum - (this.amount - 1);
 
+	}
 	public Criteria(String pageNo, String amount, String searchField, String searchWord) {
 		
 		if(pageNo != null && !"".equals(pageNo)) {

@@ -18,7 +18,7 @@ public class MakeTestData2 extends DBConnection{
 		int res = 0;
 		try {
 			
-			for(int i=101; i<=155; i++) {
+			for(int i=7; i<=100; i++) {
 				pstmt = con.prepareStatement("insert into book (no, title, rentyn, author)\r\n"
 						+ "values ("+i+", '책"+i+"', 'N', '작가"+i+"')");
 				//입력 실행

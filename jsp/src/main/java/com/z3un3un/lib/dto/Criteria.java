@@ -15,6 +15,16 @@ public class Criteria {
 		EndNo = this.pageNo * this.amount;
 		startNo = EndNo - (this.amount-1);
 	}
+	
+	public Criteria(String pageNo, String amount) {
+		if(pageNo != null && !"".equals(pageNo)) {
+			this.pageNo = Integer.parseInt(pageNo);
+		}
+		if(amount != null && !"".equals(amount)) {
+			this.amount = Integer.parseInt(amount);
+		}
+	}
+
 	public Criteria(String pageNo, String amount, String searchField, String searchWord) {
 		
 		if(pageNo != null && !"".equals(pageNo)) {

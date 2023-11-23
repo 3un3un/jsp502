@@ -13,24 +13,26 @@ public class BookDao extends DBConnPool{
 	public List<BookDto> getList(Criteria cri){
 		List<BookDto> list = new ArrayList<>();
 		try {
-			String where="";
 			if(!"".equals(cri.getSearchWord()) 
 					&& !"".equals(cri.getSearchField())){
-				where = " and "+cri.getSearchField()+ " like '%"+cri.getSearchWord()+"%'";
+				pstmt = con.prepareStatement("select * from\r\n"
+						+ "(select * from book where "+cri.getSearchField()+" like '%"+cri.getSearchWord()+"%')");
+			} else {
+				pstmt = con.prepareStatement("select * from book"
+						+ " where no between ? and ?");
+				pstmt.setInt(1,cri.getStartNo());
+				pstmt.setInt(2,cri.getEndNo());
 			}
-			pstmt = con.prepareStatement("select * from book"
-					+ " where no between ? and ?"+where);
 			System.out.println("cri.getSearchField()"+cri.getSearchField());
 			System.out.println("cri.getSearchWord()"+cri.getSearchWord());
-			pstmt.setInt(1,cri.getStartNo());
-			pstmt.setInt(2,cri.getEndNo());
+
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String no = rs.getString("no");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
-				
-				BookDto dto = new BookDto(no, title, author);
+				String rentyn = rs.getString("rentyn");
+				BookDto dto = new BookDto(no, title, author, rentyn);
 				list.add(dto);
 			}
 		} catch (SQLException e) {

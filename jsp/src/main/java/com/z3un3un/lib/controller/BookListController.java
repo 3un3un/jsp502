@@ -15,11 +15,7 @@ import com.z3un3un.lib.dto.PageDto;
 @WebServlet("/bookList")
 public class BookListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 도서목록을 조회 후 request 영역에 저장한다.
-	 * bookList.jsp로 foward한다.
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String pageNo = request.getParameter("pageNo");
