@@ -15,6 +15,14 @@
 </head>
 <body>
 <br>
+<!-- 
+페이지 블럭을 출력하는 방법
+	1. 요청 컨트롤러에서(BoardListController) pageDto를 request영역에 저장
+	2. PageNavi.jsp를 include하기
+		- 리스트 페이지의 페이지 블럭을 출력하고 싶은 위치에
+	3. searchForm을 생성한다.-> board.jsp에 있음 
+		pageNo 요소가 있어야 함
+ -->
 <!-- 페이지 네비게이션 -->
 <nav aria-label="...">
   <ul class="pagination">

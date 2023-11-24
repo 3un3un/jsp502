@@ -87,7 +87,7 @@ public class BoardDao extends DBConnPool {
 		
 		
 		String sql = "select count(*)\r\n"
-				+ "from board";
+				+ "from board "+where;
 		
 		
 		try {
