@@ -58,7 +58,7 @@ public class MemberRegController extends HttpServlet {
 				//회원가입 성공
 				System.out.println("성공");
 				request.setAttribute("msg", "회원가입 성공! 로그인 후 이용해주세요.");
-				request.setAttribute("url", "/06session/servletEx/loginForm.jsp");
+				request.setAttribute("url", "/06session/servletEx/.jsp");
 			} else {
 				//회원가입 실패
 				//	- 컬럼의 사이즈보다 입력값이 큰 경우, 타입이 맞지않는 경우 -> 입력화면에 유효성검증을 추가하여 해결

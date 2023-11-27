@@ -101,5 +101,30 @@ public class BookDao extends DBConnPool{
 
 		return res;
 	}
+	
+	
+	/**
+	 * 도서의 상세 정보를 조회 후 반환한다.
+	 * @param no
+	 * @return 도서정보(BookDto)
+	 */
+	public int bookReg(BookDto dto) {
+		int res = 0;
+		String sql ="INSERT INTO BOOK (no, title, rentyn, author)\r\n"
+				+ "		VALUES (seq_book_no.nextval, ?, 'N', ?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getAuthor());
+			System.out.println(dto.getTitle()+" / "+dto.getAuthor());
+			res = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }

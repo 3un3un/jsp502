@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	
+	<%@ include file="../header.jsp" %>
     <title>SB Admin 2 - Register</title>
 
     <!-- Custom fonts for this template-->
@@ -168,7 +169,7 @@
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="/loginController">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
