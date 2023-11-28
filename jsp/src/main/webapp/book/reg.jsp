@@ -13,8 +13,8 @@
 <body>
 <script type="text/javascript">
 window.onload = function() {
- 	let bookRegBtn = document.querySelector('#bookRegBtn');
- 	bookRegBtn.addEventListener('click', function(){
+ 	let regBtn = document.querySelector('#regBtn');
+ 	regBtn.addEventListener('click', function(){
  		bookRegForm.submit();
  	});
 	 
@@ -33,7 +33,8 @@ window.onload = function() {
 		</div>
 		<div class="card-body">
 			<!-- 등록폼 -->
-			<form action='/book/bookRegProcess' name="bookRegForm" method="post">
+			<!-- enctype 속성 지정 -->
+			<form action='/book/bookRegProcess' name="bookRegForm" method="post" enctype="multipart/form-data">
 				<div class="input-group mb-3">
 		  			<span class="w-15 input-group-text" id="basic-addon1">도서명</span>
 		  			<!-- 서버에 값을 넘길 요소 -->
@@ -53,11 +54,11 @@ window.onload = function() {
 		  			 aria-label="Username" aria-describedby="basic-addon1">
 				</div>
 				<div class="input-group mb-3">
-					<span class="w-15 input-group-text" id="basic-addon1">표지이미지</span>
+					<span class="w-20 input-group-text" id="basic-addon1">표지이미지</span>
   						<input type="file" class="form-control" name="imgFile"
   						id="inputGroupFile01">
 				</div>
-				<button class="btn btn-dark" id="bookRegBtn">도서등록</button>
+				<button class="btn btn-dark" id="regBtn">도서등록</button>
 			</form>
 		</div>
 		

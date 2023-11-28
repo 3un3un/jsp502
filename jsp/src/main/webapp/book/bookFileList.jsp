@@ -14,20 +14,20 @@
 	<table border="1">
 		<tr>
 			<th>번호</th>
-			<th>이름</th>
 			<th>제목</th>
-			<th>카테고리</th>
+			<th>작가</th>
+			<th>도서소개</th>
 			<th>ofile</th>
 			<th>sfile</th>
 			<th>게시날짜</th>
 		</tr>
-		
+
 	<c:forEach var="dto" items="${list }">
 		<tr>
 			<td>${dto.file_no }</td>
-			<td>${dto.name }</td>
 			<td>${dto.title }</td>
-			<td>${dto.cate }</td>
+			<td>${dto.author }</td>
+			<td>${dto.intro }</td>
 			<td>${dto.ofile }</td>
 			<td>${dto.sfile }</td>
 			<td>${dto.postdate }</td>
@@ -36,32 +36,6 @@
 	
 	</table>
 </form>
-<!-- ofile : 원본파일명
-	 sfile : 저장된 파일명
- -->
-<a href="filedownload.jsp?ofile=이클립스 위치.txt
-		&sfile=이클립스 위치_202311332_102029916.txt">
-	파일명(링크 - ofile)</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>

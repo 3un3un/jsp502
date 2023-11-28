@@ -31,7 +31,7 @@ public class BookDto {
 		this.no = no;
 		this.title = title;
 		this.author = author;
-		this.rentyn = rentyn;
+		setRentyn(rentyn);
 	}
 	
 	public String getRentyn() {
@@ -40,7 +40,7 @@ public class BookDto {
 	//rentyn이 세팅될 때 rentynStr을 같이 세팅해줘야 다른 생성자로 들어와도 일관성 갖는다.
 	public void setRentyn(String rentyn) {
 		this.rentyn = rentyn;
-		rentynStr = rentyn.equals("Y")? "대여중" : "";
+		rentynStr = rentyn.equals("Y")? "대여중" : "대여가능";
 	}
 
 	public String getNo() {

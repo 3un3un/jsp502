@@ -140,6 +140,7 @@
 								<th scope="col">도서명</th>
 								<th scope="col">작가</th>
 								<th scope="col">대여여부</th>
+								<th scope="col">대여테스트</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -158,6 +159,7 @@
 										<td>${dto.author}</td>
 										<!-- rentyn값(Y/N)에 따라 출력하기 -> 대여/대여중 -->
 										<td>${dto.rentynStr}</td>
+										<td>${dto.rentyn}</td>
 									</tr>
 								</c:forEach>
 							</c:if>

@@ -1,53 +1,46 @@
 package com.z3un3un.dto;
 
-public class FileDto {
+public class BookFileDto {
 	
 	private int file_no;
-	private String name;
 	private String title;
-	private String cate;
+	private String author;
+	private String intro;
 	private String ofile;
 	private String sfile;
 	private String postdate;
 	
-	public FileDto() {
+	public BookFileDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
 		return "file_no:" + file_no
-				+ "\nname : " + name
 				+ "\ntitle : " + title
-				+ "\ncate : " + cate
+				+ "\nauthor : " + author
+				+ "\nintro : " + intro
 				+ "\nofile : " + ofile
-				+ "\nsfile : " + title
+				+ "\nsfile : " + sfile
 				+ "\npostdate : " + postdate;
 				
 	}
 	
-	public FileDto(int file_no, String name, String title, String cate, String ofile, String sfile, String postdate) {
+	public BookFileDto(int file_no, String title, String author, String intro, String ofile, String sfile, String postdate) {
 		super();
 		this.file_no = file_no;
-		this.name = name;
 		this.title = title;
-		this.cate = cate;
+		this.author = author;
+		this.intro = intro;
 		this.ofile = ofile;
 		this.sfile = sfile;
 		this.postdate = postdate;
 	}
-	
 	public int getFile_no() {
 		return file_no;
 	}
 	public void setFile_no(int file_no) {
 		this.file_no = file_no;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getTitle() {
 		return title;
@@ -55,21 +48,17 @@ public class FileDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getCate() {
-		return cate;
+	public String getAuthor() {
+		return author;
 	}
-	public void setCate(String[] cateArr) {
-		//체크박스는 여러개 선택이 가능하므로 배열형태로 값을 전달 받는다.
-		//배열로부터 하나씩 꺼내서 문자열로 만들어 준다.
-		String cateStr = "";
-		for(String cate : cateArr) {
-			cateStr += cate+",";
-		}
-		this.cate = cateStr;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
-	public void setCate(String cate) {
-		this.cate = cate;
-		
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 	public String getOfile() {
 		return ofile;
@@ -89,5 +78,8 @@ public class FileDto {
 	public void setPostdate(String postdate) {
 		this.postdate = postdate;
 	}
-
+	
+	
+	
+	
 }
